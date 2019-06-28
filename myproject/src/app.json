@@ -1,0 +1,17 @@
+{
+  "pages": [ 
+    "pages/index/main",
+    "pages/addView/main",
+    "pages/viewList/main",
+    "pages/viewListDetail/main",
+    "pages/matchAddress/main",
+    "pages/mine/main",
+    "pages/clock/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "一面而就",
+    "navigationBarTextStyle": "black"
+   }
+}

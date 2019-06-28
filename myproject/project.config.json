@@ -1,0 +1,94 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"enhance": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"nodeModules": true,
+		"autoAudits": true,
+		"uglifyFileName": true,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"miniprogramRoot": "dist/wx/",
+	"compileType": "miniprogram",
+	"appid": "wx3375420e2c184d34",
+	"projectname": "myproject",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "添加面试",
+					"pathName": "pages/addView/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "面试列表",
+					"pathName": "pages/viewList/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "面试详情",
+					"pathName": "pages/viewListDetail/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "匹配地址",
+					"pathName": "pages/matchAddress/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的页面",
+					"pathName": "pages/mine/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "打卡页面",
+					"pathName": "pages/clock/main",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}
