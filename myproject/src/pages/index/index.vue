@@ -5,11 +5,11 @@
             <span>
               <img src="../../../static/images/location.png" alt="">
             </span>
-            <span class="mine">
+            <span class="mine" @click="gotoMine">
               <img src="../../../static/images/my.png" alt="">
             </span>
           </p>
-         <button class="addBtn">添加面试 </button>
+         <button class="addBtn" @click="addView">添加面试 </button>
   </div>
 </template>
 
@@ -32,22 +32,20 @@ export default {
   },
 
   methods: {
-    bindViewTap () {
-      const url = '../logs/main'
-      if (mpvuePlatform === 'wx') {
-        mpvue.switchTab({ url })
-      } else {
-        mpvue.navigateTo({ url })
-      }
+    addView(){
+      wx.navigateTo({
+        url:'../addView/main'
+      })
     },
-    clickHandle (ev) {
-      console.log('clickHandle:', ev)
-      // throw {message: 'custom test'}
+    gotoMine(){
+      wx.navigateTo({
+        url:'../mine/main'
+      })
     }
   },
 
   created () {
-    // let app = getApp()
+  
   }
 }
 </script>

@@ -2,25 +2,26 @@
     <div>
         <div class="top">
             <ul class="list">
-              <li v-for="(item,index) in list" :key="index">{{item.title}}</li>
+              <li v-for="(item,index) in list" :key="index" :class="{active:index===ind}" @click="listCheck(index)">{{item.title}}</li>
             </ul>
         </div>
         <div class="bottom">
-            <dl v-for="(item,index) in arr" :key="index">
+            <dl v-for="(item,index) in getListGetters" :key="index" @click="gotoDetail(item.id)">
                 <dd>
-                    <h3>{{item.title}}</h3>
+                    <h3>{{item.company}}</h3>
                     <span>{{item.type}}</span>
                 </dd>
                 <p>{{item.address}}</p>
                 <dt>
-                    <span>面试时间：{{item.time}}</span>
-                    <span class="remind">{{item.remind}}</span>
+                    <span>面试时间：{{item.create_time}}</span>
+                    <span class="remind">{{item.reminds}}</span>
                 </dt>       
             </dl>
         </div>
     </div>
 </template>
 <script>
+import {mapState,mapMutations,mapActions,mapGetters} from "vuex"
 export default {
     props:{
 
@@ -30,42 +31,31 @@ export default {
     },
     data(){
         return {
-            list:[
-                {
-                    "title":"未开始"
-                },{
-                    "title":"已打卡"
-                },{
-                    "title":"已放弃"
-                },{
-                  "title":"全部"
-                }
-            ],
-            arr:[
-                {
-                    title:'百度',
-                    address:'吉林市长春市朝阳区西港路767号',
-                    time:'2019-06-29 16:00',
-                    type:'未开始',
-                    remind:'未提醒'
-                },  {
-                    title:'快手',
-                    address:'吉林市长春市朝阳区西港路767号',
-                    time:'2019-07-02 16:00',
-                    type:'未开始',
-                    remind:'未提醒'
-                }
-            ]
         }
     },
     computed:{
-
+         ...mapState({
+             ind:state=>state.viewList.ind,
+             list:state=>state.viewList.list,
+             newArr:state=>state.viewList.newArr,
+             newList:state=>state.viewList.newList,
+         }),
+        ...mapGetters({
+            getListGetters:"viewList/getListGetters"
+        })
     },
     methods:{
-
+        ...mapMutations({
+            listCheck:"viewList/listCheck",
+            getListMutations:"viewList/getListMutations",
+            gotoDetail:"viewList/gotoDetail"
+        }),
+        ...mapActions({
+            getList:"viewList/getList"
+        })
     },
     created(){
-
+        this.getList()
     },
     mounted(){
 
@@ -74,14 +64,24 @@ export default {
 </script>
 <style>
     .list{
+        position: fixed;
+        top:0;
+        left:0;
+        background: #fff;
+        width: 100%;
         height:45px;
         display: flex;
         border-top: 1px solid #ccc;
         align-items: center;
+        justify-content: space-around;
+      
     }
     .list li{
-        flex: 1;
-        text-align: center;
+        height:45px;
+        line-height: 45px;
+    }
+    .bottom{
+        margin-top: 50px;
     }
     dl{
      height: 106px;
@@ -99,8 +99,8 @@ export default {
     dd span{
         padding: 5px;
         background: #eee;
-         font-size: 16px;
-         color:#999;
+        font-size: 16px;
+        color:#999;
     }
     dl p{
         color: #999999;
@@ -113,5 +113,9 @@ export default {
         border-color: hsla(0,87%,69%,.2);
         font-size: 17px;
         color:#f56c6c; 
+    }
+    .active{
+        color: rgb(57, 57, 240);
+        border-bottom: 1px solid rgb(57, 57, 240);
     }
 </style>
