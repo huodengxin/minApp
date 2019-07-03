@@ -1,19 +1,24 @@
 import request from "../utils/request"
 //登录
 export let login=code=>{
-   return  request.post("/user/code2session",{
-           code
+    return  request.post("/user/code2session", {
+        code
     })
 }
 //面试列表
-export let getLists=()=>{
-    return request.get("/sign")
+export let getLists=(status)=>{
+    console.log("xxxx",status)
+    return request.get("/sign",status)
 }
 //面试详情
 export let getListDetails=(id)=>{
-    return request.get("/sign/"+id)
+    return request.get("/sign/" + id)
 } 
 //个人中心
 export let encryptDatas=(params)=>{
-    return request.post("/user/decrypt",params)
+    return request.post("/user/decrypt", params)
+}
+//添加面试
+export let addViewList=(obj)=>{
+    return request.post("/sign", obj)
 }

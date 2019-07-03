@@ -1,10 +1,10 @@
 <template>
        <map id="map" 
-         :longitude="longitude" 
-         :latitude="latitude" 
-         scale="14"
-         show-location 
-         style="width: 100%; height: 300px;">
+            :longitude="longitude" 
+            :latitude="latitude" 
+            scale="14"
+            show-location 
+            style="width: 100%; height: 300px;">
        </map> 
 </template>
 <script>
@@ -18,8 +18,8 @@ export default {
     },
     data(){
         return {
-        longitude:"113.324520", 
-         latitude:"23.099994" 
+            longitude:"113.324520", 
+            latitude:"23.099994" 
         }
     },
     computed:{
@@ -30,18 +30,18 @@ export default {
     },
     created(){
         let qqmapsdk = new QQMapWX({
-           key: 'X7RBZ-MMOKR-UQEWJ-WSCXC-IVXVK-IFFLL'
+            key: 'X7RBZ-MMOKR-UQEWJ-WSCXC-IVXVK-IFFLL'
         });
         let that = this;
         wx.getLocation({
-        type: 'wgs84',
-        success (res) {
-            console.log('res...', res);
-            that.latitude = res.latitude
-            that.longitude = res.longitude
-            const speed = res.speed
-            const accuracy = res.accuracy
-        }
+            type: 'wgs84',
+            success (res) {
+                console.log('res...', res);
+                that.latitude = res.latitude
+                that.longitude = res.longitude
+                const speed = res.speed
+                const accuracy = res.accuracy
+            }
         }) 
     },
     mounted(){
@@ -50,8 +50,8 @@ export default {
 }
 </script>
 <style>
-#map{
-  width: 100%;
-  height: 100% !important;
-}
+    #map{
+        width: 100%;
+        height: 100% !important;
+    }
 </style>

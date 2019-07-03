@@ -1,34 +1,32 @@
-import request from "../../utils/request"
+import {addViewList} from "@/request"
 const state={
-    num:105,
     longitude:"113.324520",
     latitude:"23.099994",
     current: {
         company: '',
         phone: '',
         address: '',
-        description: ''
-      }
+        description: '',
+        lng:"",
+        lat:""
+    }
 }
 const mutations={
     updateState(state, obj){
-        console.log(obj.obj.address)
+        console.log(obj.obj.location)
         state.current.address= obj.obj.address
+        state.current.lng= obj.obj.location.lng
+        state.current.lat= obj.obj.location.lat
     }
 }
 const getters={
-    getNum(state){
-        return state.num
-    }
+   
 }
 const actions={
-   addViewActions({commit},obj){
-       console.log(obj)
-     request.post("/sign",obj).then(res=>{
-       console.log(res)
-        // commit("addViewMutions",res)
-     }) 
-   }
+    async addViewActions({commit}, obj){
+        let data=await addViewList(obj)
+        return data
+    }
 }
 export default{
     namespaced:true,

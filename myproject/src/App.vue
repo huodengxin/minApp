@@ -1,23 +1,21 @@
 <script>
 import {login} from "./request"
 export default {
-  created () {
-    //登录
-    wx.login({
-    success:async (res)=>{
-        let data= await login(res.code)
-        console.log("data....",data)
-        try {
-          wx.setStorageSync('openid',data.data.openid)
-        } catch(e){
-          
-        } 
-      }
-    })
-  }
- 
+    created () {
+        //登录
+        wx.login({
+            success:async (res)=>{
+                let data= await login(res.code)
+                console.log("data....",data)
+                try {
+                    wx.setStorageSync('openid',data.data.openid)
+                } catch(e){
+                
+                } 
+            }
+        })
+    }
 }
-
 </script>
 
 <style>

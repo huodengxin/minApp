@@ -5,13 +5,12 @@
             <input type="text" placeholder="面试地址" @input="getsuggest">
         </p>
         <ul class="searchList">
-            <li v-for="(item,index) in suggestions" :key="index"  @click="select(index)">
+            <li v-for="(item, index) in suggestions" :key="index"  @click="select(index)">
                 <img src="../../../static/images/location.svg" alt="">
                 <view>
                     <p>{{item.title}}</p>
                     <p class="addr">{{item.address}}</p>
                 </view>
-               
             </li>
         </ul>
     </div>
@@ -38,17 +37,22 @@ export default {
             updateState: 'addView/updateState'
         }),
         getsuggest(e){
-             let qqmapsdk = new QQMapWX({
+            let qqmapsdk = new QQMapWX({
                 key: 'X7RBZ-MMOKR-UQEWJ-WSCXC-IVXVK-IFFLL'
             });
              var _this = this;
             //调用关键词提示接口
-            qqmapsdk.getSuggestion({
-            keyword: e.target.value, //用户输入的关键词，可设置固定值,如keyword:'KFC'
-            success: function(res) {//搜索成功后的回调
-                _this.suggestions=res.data
-            }
+            let timer=null;
+            clearTimeout(timer)
+            timer=setTimeout(()=>{
+                qqmapsdk.getSuggestion({
+                keyword: e.target.value, //用户输入的关键词，可设置固定值,如keyword:'KFC'
+                success: function(res) {//搜索成功后的回调
+                    _this.suggestions=res.data
+                }
             })
+            },1500)
+           
         },
         select(index){
             this.updateState({
@@ -85,8 +89,8 @@ export default {
         text-align: center;
     }
     input{
-          border-left: 1px solid #ccc;
-          padding: 0 15px;
+        border-left: 1px solid #ccc;
+        padding: 0 15px;
     }
     .searchList{
         width: 100%;
@@ -102,9 +106,9 @@ export default {
         align-items: center;
     }
      .searchList li img{
-         width: 44rpx;
-         height: 44rpx;
-         margin: 0 20px;
+        width: 44rpx;
+        height: 44rpx;
+        margin: 0 20px;
      }
     .addr{
         font-size: 24rpx;
