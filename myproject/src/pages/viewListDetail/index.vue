@@ -23,11 +23,12 @@
         <div v-if="detailArr[0].status!==1">
             <p class="bottom">
                 <span class="title">取消提醒 : </span>
-                <switch/>
+                <switch @change="changeRemind"/>
             </p>
             <div class="btnBox"> 
                 <button class="left" @click="gotoClock(detailArr[0].company)">去打卡</button>
-                <button class="right">放弃面试</button>
+                <button class="right" 
+                    @click="giveUp">放弃面试</button>
             </div>
         </div>    
     </div>
@@ -43,7 +44,7 @@ export default {
     },
     data(){
         return {
-
+            check:false
         }
     },
     computed:{
@@ -53,15 +54,47 @@ export default {
     },
     methods:{
         ...mapActions({
-            getListDetail : "viewList/getListDetail"
+            getListDetail : "viewList/getListDetail",
+            giveupView:"viewList/giveupView"
         }),
         ...mapMutations({
             getDetailList : "viewList/getDetailList"
         }),
+        async giveUp(){
+            let data= await this.giveupView({id:this.detailArr[0].id,params:{status:1}}) 
+            if(data.code==0){
+                wx.showModal({
+                    title:'温馨提示',
+                    content:'确定要放弃吗',
+                    success (res) {
+                    if (res.confirm) { 
+                        wx.showToast({
+                            title:data.msg
+                        })         
+                } else if (res.cancel) {
+                console.log('用户点击取消')
+                }}
+            })
+            }
+           
+           
+        },
+        async changeRemind(e){
+            console.log(e.target.value)
+            if(e.target.value){
+                let data= await this.giveupView({id:this.detailArr[0].id,params:{remind	:1}})
+                console.log("xuyaode...",data)
+                if(data.code==0){
+                    wx.showToast({
+                        title:data.msg
+                    })
+                }
+            }
+            
+        },
         gotoClock(title){
             wx.navigateTo({
-                url:'/pages/clock/main',
-                title
+                url:'/pages/clock/main?title='+title
             })
         }
     },
@@ -69,10 +102,11 @@ export default {
        
     },
     mounted(){
-    
+
     },
     onLoad(){
         this.getListDetail()
+       
     }
 }
 </script>

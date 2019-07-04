@@ -13,7 +13,7 @@
 import Map from "@/components/Map.vue"
 export default {
     props:{
-
+      
     },
     components:{
       Map
@@ -34,6 +34,12 @@ export default {
     },
     mounted(){
 
+    },
+    onLoad(option){
+      console.log(option)
+      wx.setNavigationBarTitle({
+        title:option.title+'-打卡'
+      })
     }
 }
 </script>

@@ -1,6 +1,7 @@
-import {getLists,getListDetails} from "../../request"
+import {getLists,getListDetails,viewGiveup} from "../../request"
 function mapArr(arr){
     return arr.map(val=>{
+        console.log("曹品的val...",val)
         //对时间的处理
             if(val.create_time.includes("/")){
                 val.create_time=val.create_time
@@ -63,7 +64,6 @@ const mutations={
     },
     //去往面试列表详情页
     gotoDetail(state, id){
-        console.log("id123..",id)
         state.id=id
         wx.navigateTo({
             url:'/pages/viewListDetail/main?id=' + id
@@ -76,7 +76,9 @@ const mutations={
         wx.setNavigationBarTitle({title:state.detailArr[0].company})
     }
 }
+
 const getters={
+    //面试列表数据获取
      getListGetters(state){
         return  state.newArr=mapArr(state.newArr)
      }
@@ -93,6 +95,11 @@ const actions={
         getListDetails(state.state.id).then(res=>{
             state.commit("getDetailList", res.data)
         })
+    },
+    //放弃面试
+    async giveupView({commit},obj){
+        let data = await viewGiveup(obj)
+        return data
     }
 }
 export default{

@@ -1,7 +1,7 @@
 import {addViewList} from "@/request"
 const state={
-    longitude:"113.324520",
-    latitude:"23.099994",
+    longitude:"",
+    latitude:"",
     current: {
         company: '',
         phone: '',
@@ -12,11 +12,18 @@ const state={
     }
 }
 const mutations={
+    //面试地址的定位
     updateState(state, obj){
-        console.log(obj.obj.location)
         state.current.address= obj.obj.address
         state.current.lng= obj.obj.location.lng
         state.current.lat= obj.obj.location.lat
+    },
+    //初始定位
+    chengeLoaction(state,obj){
+        state.longitude=obj.longitude;
+        state.latitude=obj.latitude;
+        console.log("long",state.longitude)
+        console.log("lat",state.latitude)
     }
 }
 const getters={
