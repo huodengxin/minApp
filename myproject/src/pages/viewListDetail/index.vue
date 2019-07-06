@@ -20,13 +20,13 @@
             <span class="title">面试状态 : </span>
             <span>{{detailArr[0].type}}</span>
         </p>
-        <div v-if="detailArr[0].status!==1">
+        <div v-if="detailArr[0].status!==1&&detailArr[0].status!==0">
             <p class="bottom">
                 <span class="title">取消提醒 : </span>
                 <switch @change="changeRemind"/>
             </p>
             <div class="btnBox"> 
-                <button class="left" @click="gotoClock(detailArr[0].company)">去打卡</button>
+                <button class="left" @click="gotoClock(detailArr[0])">去打卡</button>
                 <button class="right" 
                     @click="giveUp">放弃面试</button>
             </div>
@@ -58,7 +58,8 @@ export default {
             giveupView:"viewList/giveupView"
         }),
         ...mapMutations({
-            getDetailList : "viewList/getDetailList"
+            getDetailList : "viewList/getDetailList",
+            gotoClock : "addView/gotoClock"
         }),
         async giveUp(){
             let data= await this.giveupView({id:this.detailArr[0].id,params:{status:1}}) 
@@ -92,11 +93,9 @@ export default {
             }
             
         },
-        gotoClock(title){
-            wx.navigateTo({
-                url:'/pages/clock/main?title='+title
-            })
-        }
+        // gotoClock(obj){
+           
+        // }
     },
     created(){
        

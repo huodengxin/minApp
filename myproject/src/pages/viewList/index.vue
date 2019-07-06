@@ -74,7 +74,7 @@ export default {
             getList:"viewList/getList"
         })
     },
-    created(){
+    onShow(){
         this.getList({
             status:this.list[this.ind].id,
             page:this.page,

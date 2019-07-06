@@ -22,7 +22,7 @@ export let encryptDatas=(params)=>{
 export let addViewList=(obj)=>{
     return request.post("/sign", obj)
 }
-//取消面试
+//更新面试
 export let viewGiveup=(obj)=>{
     console.log("放弃面试...",obj)
     return request.put(`/sign/${obj.id}`,obj.params)

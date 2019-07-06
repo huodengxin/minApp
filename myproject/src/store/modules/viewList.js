@@ -1,7 +1,6 @@
 import {getLists,getListDetails,viewGiveup} from "../../request"
 function mapArr(arr){
     return arr.map(val=>{
-        console.log("曹品的val...",val)
         //对时间的处理
             if(val.create_time.includes("/")){
                 val.create_time=val.create_time
